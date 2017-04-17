@@ -22,7 +22,7 @@ namespace lab3_binding_
             {
                 return new ValidationResult(false, "Неправильный формат");
             }
-            if (s<DateTime.Now.TimeOfDay)
+            if ((s<DateTime.Now.TimeOfDay)&(MainWindowViewModel.EventDate<=DateTime.Today))
                 return new ValidationResult(false, "Дата уже прошла");
             return new ValidationResult(true, string.Empty);
         }

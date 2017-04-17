@@ -20,8 +20,8 @@ namespace lab3_binding_
         public ICommand Save { get; set; }
         public ICommand Cancel { get; set; }
         private TimeSpan _EventTime = DateTime.Now.TimeOfDay;
-        private  DateTime _EventDate = DateTime.Now;
-        public  DateTime EventDate
+        private static DateTime _EventDate = DateTime.Now;
+        public static DateTime EventDate
         {
             get { return _EventDate; }
             set { _EventDate = value; }
