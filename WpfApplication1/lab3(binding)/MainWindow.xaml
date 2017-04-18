@@ -60,8 +60,8 @@
             <TextBlock  FontSize="14" Grid.Column="1"  HorizontalAlignment="Center" Height="19"  >
             Время
             </TextBlock>
-            <DatePickerTextBox  Grid.Column="2" BorderThickness="3" VerticalAlignment="Center"  Width="70" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"   BorderBrush="Black"  FontSize="14"  >
-                <Binding   Path="EventTime"  >
+            <DatePickerTextBox   Grid.Column="2" BorderThickness="3" VerticalAlignment="Center"  Width="70" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"   BorderBrush="Black"  FontSize="14"  >
+                <Binding   Path="EventTime" >
                     <Binding.ValidationRules>
                         <local:TimeSpanValidationRule></local:TimeSpanValidationRule>
                     </Binding.ValidationRules>

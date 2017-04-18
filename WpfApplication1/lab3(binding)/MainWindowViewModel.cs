@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using System.Windows.Input;
 
 namespace lab3_binding_
 {
-    public class MainWindowViewModel:INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public string EventName { get; set; }
         public string EventDescription { get; set; }
@@ -19,34 +20,37 @@ namespace lab3_binding_
         public bool IsRepeat { get; set; }
         public ICommand Save { get; set; }
         public ICommand Cancel { get; set; }
-        private TimeSpan _EventTime = DateTime.Now.TimeOfDay;
         private static DateTime _EventDate = DateTime.Now;
         public static DateTime EventDate
         {
-            get { return _EventDate; }
-            set { _EventDate = value; }
+            get { return _EventDate.Date; }
+            set
+            {
+                _EventDate = value.Date + _EventDate.TimeOfDay;
+            }
         }
         public TimeSpan EventTime
         {
             get
             {
-                return _EventTime;
+                return _EventDate.TimeOfDay;
             }
 
             set
             {
-                _EventTime = value;
+                
+                _EventDate = _EventDate.Date + value;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void DoPropertyChanged(String name)
         {
-            if(PropertyChanged!=null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        private bool _isNotification=true;
+        private bool _isNotification = true;
         public bool IsNotification
         {
             get
@@ -58,7 +62,8 @@ namespace lab3_binding_
             {
                 _isNotification = value;
                 DoPropertyChanged("IsNotification");
-;            }
+                ;
+            }
         }
 
 
