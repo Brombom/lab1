@@ -16,15 +16,18 @@ namespace lab3_binding_
             TimeSpan s;
             try
             {
-                 s = TimeSpan.Parse(t);
+                s = TimeSpan.Parse(t);
             }
             catch
             {
                 return new ValidationResult(false, "Неправильный формат");
             }
             if ((s < DateTime.Now.TimeOfDay) & (MainWindowViewModel.EventDate <= DateTime.Today))
+            {
                 return new ValidationResult(false, "Дата уже прошла");
-            return new ValidationResult(true, string.Empty);
+            }
+            else
+                return new ValidationResult(true, string.Empty);
         }
     }
 }

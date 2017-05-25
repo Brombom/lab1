@@ -17,7 +17,7 @@ namespace lab3_binding_
             {
                 s = Convert.ToInt32(value);
             }
-            catch (Exception ex)
+            catch
             {
                 return new ValidationResult(false, "Неправильный формат");
             }

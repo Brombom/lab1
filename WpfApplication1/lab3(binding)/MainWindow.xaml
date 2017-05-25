@@ -12,7 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources.xaml"> </ResourceDictionary>
+                <ResourceDictionary Source="Resources.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -49,10 +49,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <DatePicker    Grid.Column="0"   Height="30" Width="130" HorizontalAlignment="Left"  SelectedDateFormat="Short" BorderThickness="3" BorderBrush="Black" FontSize="14">
+            <DatePicker x:Name="EventDateXaml"  Grid.Column="0"   Height="30" Width="130" HorizontalAlignment="Left"  SelectedDateFormat="Short" BorderThickness="3" BorderBrush="Black" FontSize="14">
                 <DatePicker.SelectedDate>
-                    <Binding   Path="EventDate" UpdateSourceTrigger="PropertyChanged"  >
-                        <Binding.ValidationRules>
+                    <Binding ValidatesOnDataErrors="True" NotifyOnValidationError="true"  Path="EventDate" UpdateSourceTrigger="PropertyChanged"  >
+                        <Binding.ValidationRules >
                             <local:DateTimeValidationRule></local:DateTimeValidationRule>
                         </Binding.ValidationRules>
                     </Binding>
@@ -61,7 +61,7 @@
             <TextBlock  FontSize="14" Grid.Column="1"  HorizontalAlignment="Center" Height="19"  >
             Время
             </TextBlock>
-            <DatePickerTextBox   Grid.Column="2" BorderThickness="3" VerticalAlignment="Center"  Width="70" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"   BorderBrush="Black"  FontSize="14"  >
+            <DatePickerTextBox x:Name="EventTimeXaml"  Grid.Column="2" BorderThickness="3" VerticalAlignment="Center"  Width="70" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"   BorderBrush="Black"  FontSize="14"  >
                 <Binding   Path="EventTime" >
                     <Binding.ValidationRules>
                         <local:TimeSpanValidationRule></local:TimeSpanValidationRule>
@@ -73,7 +73,7 @@
             Место
         </TextBlock>
         <TextBox Style="{StaticResource AnimTextBoxStyle}" Text="{Binding EventPlace}" Grid.Row="4" Grid.Column="1"  BorderThickness="3" BorderBrush="Black" Height="30" Margin="0,5,10,0" FontSize="14" />
-        <CheckBox  IsChecked="{Binding IsNotification}"  Content="Уведомление" Grid.Row="5" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="10,15,0,0"  FontSize="14" Height="18">
+        <CheckBox IsChecked="{Binding IsNotification}"  Content="Уведомление" Grid.Row="5" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="10,15,0,0"  FontSize="14" Height="18">
         </CheckBox>
         <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions >
@@ -85,12 +85,12 @@
             <TextBlock Visibility="{Binding IsNotification, Converter={StaticResource BoolToVisConverter}}"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" FontSize="14" Margin="10,0,0,0" Height="19" >
             За
             </TextBlock>
-            <TextBox Style="{StaticResource AnimTextBoxStyle}" Visibility="{Binding IsNotification, Converter={StaticResource BoolToVisConverter}}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" BorderThickness="3" BorderBrush="Black" Width="100"  Height="30" FontSize="14" >
+            <TextBox x:Name="RemindTimeXaml" Style="{StaticResource AnimTextBoxStyle}" Visibility="{Binding IsNotification, Converter={StaticResource BoolToVisConverter}}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" BorderThickness="3" BorderBrush="Black" Width="100"  Height="30" FontSize="14" >
                 <Binding Path="RemindTime" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <local:TypeOfTimeValidationRule></local:TypeOfTimeValidationRule>
                     </Binding.ValidationRules>
-                    
+
                 </Binding>
             </TextBox>
             <ComboBox Visibility="{Binding IsNotification, Converter={StaticResource BoolToVisConverter}}" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" BorderThickness="2" Height="30" BorderBrush="Black"  SelectedIndex="1" FontSize="14" FontFamily="Segoe Print" 
@@ -100,12 +100,13 @@
         </Grid>
         <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58*" />
+                <ColumnDefinition Width="201*"/>
+                <ColumnDefinition Width="259*" />
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonStyle}"  Content="Отмена" Command="{Binding Cancel}" CommandParameter="{Binding}" Grid.Column="0" IsCancel="True"  BorderThickness="2" BorderBrush="#FF6B6666" HorizontalAlignment="Left" Margin="10,0,0,10"  VerticalAlignment="Bottom" Width="120" Height="30"  FontSize="16"  >
+            <Button Style="{StaticResource ButtonStyle}"  Content="Отмена"  Command="{Binding Cancel}" CommandParameter="{Binding}" Grid.Column="0" IsCancel="True"  BorderThickness="2" BorderBrush="#FF6B6666" HorizontalAlignment="Left" Margin="10,0,0,10"  VerticalAlignment="Bottom" Width="120" Height="30"  FontSize="16" Grid.ColumnSpan="2"  >
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Content="Сохранить"  Command="{Binding Save}" CommandParameter="{Binding}" Grid.Column="1" IsDefault="True" BorderThickness="2" BorderBrush="#FF6B6666"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="120" Height="30" FontSize="16" />
+            <Button Style="{StaticResource SaveButtonStyle}" Content="Сохранить"  Command="{Binding Save}" CommandParameter="{Binding}" Grid.Column="2" IsDefault="True" BorderThickness="2" BorderBrush="#FF6B6666"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10.4,10" Width="120" Height="30" FontSize="16" />
         </Grid>
     </Grid>
 </Window>

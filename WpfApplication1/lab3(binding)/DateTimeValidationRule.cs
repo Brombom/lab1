@@ -14,8 +14,10 @@ namespace lab3_binding_
         {
             DateTime s = Convert.ToDateTime(value);
             if (s < DateTime.Today)
+            {
                 return new ValidationResult(false, "Дата уже прошла");
-            return new ValidationResult(true, string.Empty);
+            }
+                return new ValidationResult(true, string.Empty);
         }
     }
 }

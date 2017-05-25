@@ -7,7 +7,8 @@ using System.Windows.Input;
 
 namespace lab3_binding_
 {
-    class ButtonCommand : ICommand
+    class CancelCommand : ICommand
+
     {
         public event EventHandler CanExecuteChanged;
 
